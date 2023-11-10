@@ -1,0 +1,96 @@
+$clr-200: #D6D58E;
+$clr-300: #DBF227;
+$clr-400: #9FC131;
+$clr-500: #005C53;
+$clr-600: #042940;
+$clr-wht: #fff;
+$clr-blk: #000;
+
+// simple reset
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+@mixin linear-gradient ($deg: 45deg, $clr-1: $clr-200, $clr-2: $clr-300) {
+    background-image: linear-gradient($deg, $clr-1, $clr-2);
+}
+
+.section-one {
+    @include linear-gradient;
+}
+
+.section-two {
+    @include linear-gradient ($deg: 90deg, $clr-1: $clr-300, $clr-2: $clr-400);
+}
+
+.section-three {
+    @include linear-gradient($deg: 120deg, $clr-1: $clr-400, $clr-2: $clr-500);
+}
+
+.section-one, 
+.section-two,
+.section-three {
+    height: 33.333vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open Sans";
+}
+
+@mixin pseudo-underline ($width, $height, $background-color, $margin) {
+    content: '';
+    display: block;
+    width: $width;
+    height: $height;
+    background-color: $background-color;
+    margin: $margin auto;
+}
+
+.title {
+    font-size: 3rem;
+    color: $clr-600;
+
+    &::after {
+        @include pseudo-underline(50px, 5px, $clr-600, 2rem)
+    }
+}
+
+@mixin ui-element ($size, $color, $bg-color, $hover-color: none, $hover-bg-color:none) {
+    padding: $size calc($size * 3);
+    color: $color;
+    background-color: $bg-color;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+        color: $hover-color;
+        background-color: $hover-bg-color;
+    }
+}
+
+.button-one {
+    @include ui-element(.5rem, $clr-wht, $clr-500, $clr-500, $clr-wht);
+}
+
+.button-two {
+    @include ui-element(1rem, $clr-wht, $clr-600, $clr-600, $clr-wht);
+}
+
+.badge-one {
+    @include ui-element(.5rem, $clr-600, $clr-200);
+    display: inline;
+}
+
+.badge-two {
+    @include ui-element(.25rem, $clr-600, $clr-300);
+    display: inline;
+}
